@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php $title?></title>
+    <style>
+        /* Variables de couleurs */
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #64748b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --accent: #10b981;
+            --card-bg: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        a {
+        text-decoration: none; /* enlève le soulignement */
+        color: var(--secondary);           /* couleur du lien */
+        font-weight: bold;     /* optionnel : mettre en gras */
+        }
+
+        a:hover {
+        text-decoration: underline; /* si tu veux le souligner au survol */
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero section */
+        .hero {
+            padding: 80px 20px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-bottom: 30px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .hero-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* About section */
+        .about {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: var(--dark);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        /* Version mobile */
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column; /* Passe en colonne */
+                text-align: center; /* Centre le texte */
+            }
+
+            .about-text, 
+            .about-image {
+                flex: none;        /* Enlève le flex:1 pour éviter le partage forcé */
+                width: 100%;       /* Chaque bloc prend toute la largeur */
+            }
+
+            .about-image img {
+                max-width: 200px;  /* Tu peux réduire un peu pour mobile si tu veux */
+            }
+        }
+
+        /* Projects bubbles */
+        .projects {
+            padding: 80px 20px;
+            background-color: var(--card-bg);
+        }
+
+        .projects-container {
+            max-width: 1250px;
+            margin: 0 auto;
+        }
+
+        .projects h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: var(--dark);
+        }
+
+        .project-bubbles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .bubble {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .bubble:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .bubble h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .bubble p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .bubble-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #34495e;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1, h2 {
+            margin: 0 0 20px 0;
+        }
+        /* Conteneur commun centré */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Parcours scolaire */
+        .parcours-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+        .box-parcours {
+            border: 2px solid #2c3e50;
+            border-radius: 8px;
+            padding: 15px;
+            width: 370px;
+            background-color: #ecf0f1;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .box-parcours:hover {
+            transform: translateY(-5px);
+            box-shadow: 4px 4px 12px rgba(0,0,0,0.15);
+        }
+        .box-parcours h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            font-size: 1.2em;
+        }
+        .box-parcours p {
+            margin: 5px 0;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        /* Expériences professionnelles */
+        .exp-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            justify-content: center;
+            align-items: center;
+        }
+        .box-exp {
+            border: 2px solid #2980b9;
+            border-radius: 10px;
+            padding: 25px 30px;
+            width: 100%;
+            background: linear-gradient(135deg, #d6eaf8, #aed6f1);
+            box-shadow: 3px 3px 15px rgba(41, 128, 185, 0.3);
+            transition: box-shadow 0.3s ease;
+        }
+        .box-exp:hover {
+            box-shadow: 5px 5px 20px rgba(41, 128, 185, 0.5);
+        }
+        .box-exp h3 {
+            margin-top: 0;
+            color: #1b4f72;
+            font-size: 1.4em;
+        }
+        .box-exp h4 {
+            margin: 5px 0 15px 0;
+            color: #21618c;
+            font-weight: normal;
+            font-style: italic;
+        }
+        .box-exp p {
+            color: #1c2833;
+            line-height: 1.5;
+            font-size: 1em;
+           
+        }
+
+        /* Section projets */
+/* Section projets */
+.projects {
+    padding: 80px 20px;
+    background-color: var(--light);
+}
+
+.projects h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: var(--dark);
+}
+
+/* Grille responsive */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Carte projet */
+.project-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+/* Carrousel image */
+.project-image-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 12px;
+    width: 100%;
+    height: 260px;
+}
+
+.project-image-carousel img {
+    flex: 0 0 100%;
+    height: 100%;
+    object-fit: cover;
+    scroll-snap-align: start;
+    border-radius: 0;
+}
+
+/* Texte en dessous (jamais scrollable) */
+.project-content {
+    padding: 20px;
+    text-align: left;
+    flex: 1;
+}
+
+.project-content h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.project-content p {
+    font-size: 1rem;
+    color: var(--secondary);
+    line-height: 1.5;
+}
+
+/* Bouton */
+.project-content a {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 16px;
+    background: var(--primary);
+    color: white;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.project-content a:hover {
+    background: var(--primary-dark);
+}
+
+
+
+
+
+/* Mobile responsive */
+@media (max-width: 800px) {
+    .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        position: relative;
+    }
+
+    .nav-links {
+        flex-direction: column; /* menu vertical */
+        display: none;
+        background-color: var(--card-bg);
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        padding: 15px 0;
+        z-index: 99;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 0;
+        width: 100%;
+    }
+
+    .nav-links a {
+        display: block;
+        width: 100%;
+        padding: 12px 20px;
+        color: var(--dark);
+        font-weight: 500;
+    }
+
+    .hamburger {
+        display: block;
+        cursor: pointer;
+        font-size: 1.8rem;
+        color: var(--dark);
+    }
+}
+
+/* Desktop */
+@media (min-width: 801px) {
+    .hamburger {
+        display: none;
+    }
+    .nav-links {
+        display: flex !important;
+        flex-direction: row;
+        position: static;
+        width: auto;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+    }
+    .nav-links li {
+        margin-left: 30px;
+    }
+    .nav-links a {
+        padding: 0;
+    }
+}
+/* Mobile responsive - Projet content */
+@media (max-width: 800px) {
+    /* Assurer que le container prend bien la largeur de l'écran */
+    .projects-container,
+    .projects-grid {
+        padding: 0 0px;  /* espace sur les côtés */
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    /* Grille : 1 carte par ligne */
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* Projet card : largeur totale */
+    .project-card {
+        width: 100%;
+    }
+
+    /* Carrousel image : réduire hauteur pour mobile */
+    .project-image-carousel {
+        height: 175px;
+    }
+
+    /* Texte et boutons */
+    .project-content {
+        padding: 15px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+    <div class="nav-container">
+        <div class="logo"><a href="index.php">Josue.K</a></div>
+        <div class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('show')">
+            &#9776;
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.php">Accueil</a></li>
+            <li><a href="parcours.php">Parcours</a></li>
+            <li><a href="project.php">Projets</a></li>
+        </ul>
+    </div>
+</nav>
