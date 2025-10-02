@@ -598,23 +598,15 @@
 
   <p>Nombre de visites : <span id="visites">0</span></p>
   </div>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-44G4SNW1VJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  <script>
-    const compteurEl = document.getElementById("visites");
-    const KEY = "josuekot23.github.io/visites";
-
-    // Incrémenter et récupérer la valeur
-    fetch(`https://api.countapi.xyz/update/${KEY}/?amount=1`)
-      .then(res => res.json())
-      .then(data => {
-        compteurEl.textContent = data.value;
-      })
-      .catch(err => {
-        compteurEl.textContent = "Erreur API 😢";
-        console.error(err);
-      });
-  </script>
-
+  gtag('config', 'G-44G4SNW1VJ');
+</script>
  
 
 
