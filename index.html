@@ -594,6 +594,22 @@
             
         </div>
     </section>
+    <p>Nombre de visites : <span id="visites">0</span></p>
+
+<script>
+  const compteurEl = document.getElementById("visites");
+
+  // clé unique pour ton site (tu peux garder josuekot23.github.io/visites)
+  const KEY = "josuekot23.github.io/visites";
+
+  // Incrémenter le compteur de visites à chaque chargement de la page
+  fetch(`https://api.countapi.xyz/hit/${KEY}`)
+    .then(res => res.json())
+    .then(data => {
+      compteurEl.textContent = data.value;
+    });
+</script>
+
 
  
 
